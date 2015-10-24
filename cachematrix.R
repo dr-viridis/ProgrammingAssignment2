@@ -15,9 +15,7 @@
 
 ## Our first function is makeCacheMatrix. Per the assignment, this function
 # "creates a special 'matrix' object that can cache its inverse"
-# I'm *assuming* that because the matrix supplied is always to be invertable, 
-# forcing the use of a square matrix is okay... though the instructions
-# are not entirely clear
+
 
 makeCacheMatrix <- function(x = matrix()) {
 	m <- NULL
@@ -32,10 +30,14 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## This function computes the inverse of the matrix returned by the 
-# makeCacheMatrix function. If the invers has already been calculated, 
+## This function provides the inverse of the matrix returned by the 
+# makeCacheMatrix function. If the inverse has already been calculated, 
 # then this function retrieves the inverse from the cache, rather than
-# calculating it
+# calculating it.
+#
+# If the inverse has not yet been calculated, this function calculates 
+# it using the R 'solve' command; we have been assured that any matrix 
+# passed to it will be invertable
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -47,7 +49,7 @@ cacheSolve <- function(x, ...) {
 		return(m)
 	}
 	data <- x$get()
-	m <- solve()	# if inverse is not cached, calculate it
+	m <- solve(data, ...)	# if inverse is not cached, calculate it
 	x$setinverse(m)
 	m
 }
